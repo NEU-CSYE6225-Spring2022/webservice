@@ -11,6 +11,9 @@ Basic spring-boot project with maven and swagger docs setup.
 6. check the logs for the application url.
 7. Default port is 8080 and runs in localhost.
 8. press command+c to stop the server.
+9. if you wish not to install maven.You can run following commands on respective OS.
+10. ./mvnw spring-boot:run  (unix)
+11. ./mvnw.cmd spring-boot:run  (windows)
 ## running test cases
 1. change to the repo directory i.e, springdemo.
 2. run the below command.
