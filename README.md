@@ -10,3 +10,7 @@ Basic spring-boot project with maven and swagger docs setup.
 5. mvn spring-boot:run
 6. check the logs for the application url.
 7. press command+c to stop the server.
+## urls 
+1. http://localhost:8080/healthz (health check api)
+2. http://localhost:8080/swagger-ui/index.html  (swagger ui)
+3. http://localhost:8080/v2/api-docs  (api docs)
