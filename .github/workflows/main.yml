@@ -4,6 +4,8 @@
 name: Main Branch PR Workflow
 
 on:
+  push:
+    branches: [ main ]
   pull_request:
     branches: [ main ]
 
