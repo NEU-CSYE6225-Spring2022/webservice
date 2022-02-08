@@ -15,7 +15,7 @@ import java.util.Map;
 @RestController
 public class HealthCheckController {
 
-    @ApiOperation(value = "Check the health api", response = String.class)
+    @ApiOperation(value = "Check the health api", response = Map.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully got the Status"),
             @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
