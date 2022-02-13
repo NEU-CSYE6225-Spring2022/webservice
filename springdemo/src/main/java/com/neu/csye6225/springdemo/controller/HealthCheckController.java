@@ -1,6 +1,7 @@
 package com.neu.csye6225.springdemo.controller;
 
 import com.neu.csye6225.springdemo.util.Constants;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -13,6 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
+@Api(value = "HealthCheck REST Endpoint", description = "Returns 200 if application is Up and Running")
 public class HealthCheckController {
 
     @ApiOperation(value = "Check the health api", response = Map.class)
