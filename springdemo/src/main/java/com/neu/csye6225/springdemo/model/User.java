@@ -27,7 +27,7 @@ public class User implements Serializable {
     @GeneratedValue(generator = "UUID")
     @GenericGenerator( name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     @Column(name = "id", updatable = false, nullable = false)
-    @ApiModelProperty(hidden = true)
+    @ApiModelProperty(hidden = true, readOnly = true)
     private String id;
 
     @Column(name = "first_name")

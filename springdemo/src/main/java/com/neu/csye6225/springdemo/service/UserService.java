@@ -10,4 +10,6 @@ public interface UserService {
     User createUser(User user);
 
     User updateUser(UserRequest user);
+
+    boolean isUsernameAlreadyExists(String username);
 }

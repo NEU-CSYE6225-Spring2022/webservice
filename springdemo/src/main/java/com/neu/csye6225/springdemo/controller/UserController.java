@@ -54,7 +54,7 @@ public class UserController {
     })
     public ResponseEntity<UserResponse> createUser(@RequestBody UserRequest userRequest) {
 
-        if(!Validator.isUserRequestValid(userRequest) ){
+        if(!Validator.isUserRequestValid(userRequest) || isUsernameAlreadyExists(userRequest.getUsername()) ){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
         User user  = modelMapper.map(userRequest, User.class);
@@ -79,6 +79,11 @@ public class UserController {
 
         userService.updateUser(userRequest);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
+    private boolean isUsernameAlreadyExists(String username) {
+
+        return userService.isUsernameAlreadyExists(username);
     }
 
 }
