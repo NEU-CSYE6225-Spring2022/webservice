@@ -26,6 +26,6 @@ public class HealthCheckControllerITTest {
         ResponseEntity<String> response = template.getForEntity("/healthz", String.class);
         JSONParser jsonParser = new JSONParser();
         JSONObject jsonObject = (JSONObject) jsonParser.parse(response.getBody());
-        assertThat(jsonObject.get("Status")).isEqualTo(Constants.APPLICATION_RUNNING);
+        assertThat(jsonObject.get("Status")).isEqualTo("");
     }
 }
