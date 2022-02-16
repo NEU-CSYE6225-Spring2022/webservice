@@ -1,4 +1,4 @@
-package com.neu.csye6225.springdemo.controller;
+package com.neu.csye6225.springdemo.service;
 
 import com.neu.csye6225.springdemo.model.User;
 import com.neu.csye6225.springdemo.repository.UserRepository;
