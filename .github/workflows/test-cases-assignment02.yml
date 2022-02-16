@@ -1,11 +1,11 @@
 # This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
 # For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
 
-name: Main Branch PR Workflow
+name: Test-Cases-Assignment-01-Branch
 
 on:
-  pull_request:
-    branches: [ main ]
+  push:
+    branches: [ assignment-02 ]
 
 jobs:
   build:
@@ -19,6 +19,6 @@ jobs:
       with:
         distribution: 'temurin'
         java-version: '17'
-    - name: Running test cases
+    - name: Running test cases on featureBranch
       working-directory: springdemo
       run: mvn test

@@ -1,6 +1,7 @@
 package com.neu.csye6225.springdemo.controller;
 
 import static org.hamcrest.Matchers.equalTo;
+import static org.junit.Assert.assertEquals;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import com.neu.csye6225.springdemo.util.Constants;
@@ -24,6 +25,9 @@ public class HealthCheckControllerTest {
     @Autowired
     private MockMvc mvc;
 
+    @Autowired
+    private HealthCheckController healthCheckController;
+
     @Test
     public void healthCheck() throws Exception {
         Map<String,String> map = new HashMap<>();
@@ -31,5 +35,12 @@ public class HealthCheckControllerTest {
         mvc.perform(MockMvcRequestBuilders.get("/healthz").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.Status").value(Constants.APPLICATION_RUNNING));
+    }
+
+    @Test
+    public void healthCheck2() throws Exception {
+        Map<String,String> map = new HashMap<>();
+        map.put("Status", Constants.APPLICATION_RUNNING);
+        assertEquals(healthCheckController.healthCheck().getBody().get("Status"), map.get("Status"));
     }
 }

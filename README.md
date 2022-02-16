@@ -1,7 +1,7 @@
 # webservice
 This repo is used for Network Structures and Cloud Computing assignment Spring2022.
 ## project info
-Basic spring-boot project with maven and swagger docs setup.
+Basic spring-boot project with maven and swagger docs setup. Added Basic auth settings to the project.
 ## steps to run this project
 1. git clone git@github.com:amireddym/webservice.git
 2. Install maven in your system and java 1.8 version JDK.
@@ -22,3 +22,6 @@ Basic spring-boot project with maven and swagger docs setup.
 1. http://localhost:8080/healthz (health check api)
 2. http://localhost:8080/swagger-ui/index.html  (swagger ui)
 3. http://localhost:8080/v2/api-docs  (api docs)
+4. http://localhost:8080/v1/user (POST -- basic auth user creation)
+5. http://localhost:8080/v1/user/self (GET -- get current logged user information)
+6. http://localhost:8080/v1/user/self (PUT -- update user information)
