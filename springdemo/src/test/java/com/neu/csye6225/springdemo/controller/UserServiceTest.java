@@ -7,13 +7,16 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.MockitoAnnotations.initMocks;
 
+@SpringBootTest
 public class UserServiceTest {
 
     @Mock
@@ -35,7 +38,7 @@ public class UserServiceTest {
 
         Mockito.when(userRepository.save(any()))
                 .thenReturn(user);
-        Mockito.when(userRepository.findByUsername(anyString()))
+        Mockito.when(userRepository.findByUsername("bingis@gmail.com"))
                 .thenReturn(user);
     }
 
@@ -44,6 +47,7 @@ public class UserServiceTest {
         final String email = "bingis@gmail.com";
         final User result = userRepository.findByUsername(email);
         assertEquals(email, result.getUsername());
+        assertNotEquals("manoj@gmail.com",result.getUsername());
     }
 
     @Test
@@ -52,6 +56,5 @@ public class UserServiceTest {
         User result = userRepository.save(new User());
         assertEquals(email, result.getUsername());
     }
-
 
 }
