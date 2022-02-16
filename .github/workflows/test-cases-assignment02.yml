@@ -17,8 +17,8 @@ jobs:
     - name: Set up JDK
       uses: actions/setup-java@v2
       with:
+        distribution: 'temurin'
         java-version: '17'
-	distribution: 'temurin'
     - name: Running test cases on featureBranch
       working-directory: springdemo
       run: mvn test
