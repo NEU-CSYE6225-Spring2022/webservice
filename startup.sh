@@ -37,7 +37,11 @@ _EOF_
 print_command_info LISTING-TMP-FOLDER-FILES
 sudo ls -l /tmp
 
-# Command to run application makde it a Service to run on boot.
+# Changing permissions for running springboot startup script
+print_command_info CHANGING-PERMISSIONS-FOR-SPRINGBOOT-STARTUP-SCRIPT
+sudo chmod 777 /tmp/springboot-startup.sh
+
+# Command to run application make it a Service to run on boot.
 print_command_info MOVING-APPLICATION-BOOT-SERVICE
 sudo mv /tmp/application_boot.service /etc/systemd/system/application_boot.service
 print_command_info CHANGING-PERMISSIONS-OF-APPLICATION-BOOT-FILE

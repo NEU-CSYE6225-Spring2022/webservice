@@ -40,6 +40,11 @@ build {
     destination = "/tmp/application_boot.service"
   }
 
+  provisioner "file" {
+    source      = "springboot-startup.sh"
+    destination = "/tmp/springboot-startup.sh"
+  }
+
   provisioner "shell" {
     script = "startup.sh"
   }
