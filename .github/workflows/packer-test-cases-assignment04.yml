@@ -42,6 +42,9 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-east-1
 
+    - name: Installing packer provisioners
+      run: packer init aws-linux2.pkr.hcl
+
     - name: Running Packer template validation
       run: packer validate aws-linux2.pkr.hcl
     
