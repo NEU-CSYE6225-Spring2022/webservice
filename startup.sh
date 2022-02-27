@@ -43,4 +43,4 @@ sudo mv /tmp/application_boot.service /etc/systemd/system/application_boot.servi
 print_command_info CHANGING-PERMISSIONS-OF-APPLICATION-BOOT-FILE
 sudo chmod 644 /etc/systemd/system/application_boot.service
 print_command_info ENABLING-BOOT-UP-FOR-SPRINGBOOT
-sudo systemctl enable reboot_message.service
+sudo systemctl enable application_boot.service
