@@ -16,7 +16,7 @@ sudo systemctl start mariadb
 sudo systemctl enable mariadb
 
 # Creating database for application to connect.
-myql --user=root <<_EOF_
+mysql --user=root <<_EOF_
 CREATE DATABASE cyse2022;
 _EOF_
 
