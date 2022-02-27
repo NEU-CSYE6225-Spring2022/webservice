@@ -23,4 +23,4 @@ _EOF_
 # Command to run application makde it a Service to run on boot.
 sudo mv /tmp/application_boot.service /etc/systemd/system/application_boot.service
 sudo chmod 644 /etc/systemd/system/application_boot.service
-systemctl enable reboot_message.service
+sudo systemctl enable reboot_message.service
