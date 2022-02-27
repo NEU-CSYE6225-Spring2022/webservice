@@ -1,0 +1,9 @@
+[Unit]
+Description=Java Springboot app start on Reboot systemd service
+
+[Service]
+Type=simple
+ExecStart=/bin/sh java -jar -Dspring.profiles.active=dev /tmp/springdemo-0.0.1-SNAPSHOT.jar
+
+[Install]
+WantedBy=multi-user.target

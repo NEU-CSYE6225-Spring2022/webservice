@@ -35,6 +35,11 @@ build {
     destination = "/tmp/springdemo-0.0.1-SNAPSHOT.jar"
   }
 
+  provisioner "file" {
+    source      = "application_boot.service"
+    destination = "/tmp/application_boot.service"
+  }
+
   provisioner "shell" {
     script = "startup.sh"
   }

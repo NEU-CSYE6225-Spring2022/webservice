@@ -53,3 +53,6 @@ jobs:
 
     - name: Printing the contents of Directory
       run: ls -l
+    
+    - name: Printing contents of Manifest
+      run: cat manifest.json
