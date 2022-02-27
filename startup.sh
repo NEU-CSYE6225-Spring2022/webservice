@@ -34,8 +34,8 @@ CREATE DATABASE cyse2022;
 _EOF_
 
 # Listing files in tmp folder
-print_command_info LISTING-MP-FOLDER-FILES
-sudo ls -l
+print_command_info LISTING-TMP-FOLDER-FILES
+sudo ls -l /tmp
 
 # Command to run application makde it a Service to run on boot.
 print_command_info MOVING-APPLICATION-BOOT-SERVICE
