@@ -1,0 +1,10 @@
+[Unit]
+Description=Java Springboot app start on Reboot systemd service
+After=mariadb.service
+
+[Service]
+Type=simple
+ExecStart=/tmp/springboot-startup.sh
+
+[Install]
+WantedBy=multi-user.target
