@@ -1,5 +1,6 @@
 package com.neu.csye6225.springdemo.config;
 
+import com.neu.csye6225.springdemo.util.Constants;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
@@ -19,12 +20,20 @@ public class DatabaseConfig {
     @Value("${databasepassword}")
     private String databasepassword;
 
+    @Value("${database}")
+    private String database;
+
     @Bean
     public DataSource getDataSource()
     {
         DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
-        dataSourceBuilder.driverClassName("com.mysql.cj.jdbc.Driver");
-        dataSourceBuilder.url("jdbc:mysql://"+ databasehost +"/cyse2022?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false&allowPublicKeyRetrieval=true&useSSL=false");
+        if(database.equalsIgnoreCase(Constants.MYSQL)){
+            dataSourceBuilder.driverClassName("com.mysql.cj.jdbc.Driver");
+            dataSourceBuilder.url("jdbc:mysql://"+ databasehost +"/cyse2022?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false&allowPublicKeyRetrieval=true&useSSL=false");
+        }else{
+            dataSourceBuilder.driverClassName("org.h2.Driver");
+            dataSourceBuilder.url("jdbc:h2:mem:db;DB_CLOSE_DELAY=-1");
+        }
         dataSourceBuilder.username(databaseuser);
         dataSourceBuilder.password(databasepassword);
         return dataSourceBuilder.build();
