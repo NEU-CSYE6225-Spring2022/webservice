@@ -20,18 +20,18 @@ print_command_info INSTALLING-JAVA
 sudo rpm -Uvh jdk-17_linux-x64_bin.rpm
 
 # Commands to install Mysql and Make it a service
-print_command_info INSTALLING-MARIADB-SERVER
-sudo yum install -y mariadb-server
-print_command_info STARTING-MARIADB-SERVER
-sudo systemctl start mariadb
-print_command_info ENABLING-DEFAULT-BOOT-STARTUP-MARIADB
-sudo systemctl enable mariadb
+#print_command_info INSTALLING-MARIADB-SERVER
+#sudo yum install -y mariadb-server
+#print_command_info STARTING-MARIADB-SERVER
+#sudo systemctl start mariadb
+#print_command_info ENABLING-DEFAULT-BOOT-STARTUP-MARIADB
+#sudo systemctl enable mariadb
 
 # Creating database for application to connect.
-print_command_info CREATING-DATABSE-CYSE2022
-mysql --user=root <<_EOF_
-CREATE DATABASE cyse2022;
-_EOF_
+#print_command_info CREATING-DATABSE-CYSE2022
+#mysql --user=root <<_EOF_
+#CREATE DATABASE cyse2022;
+#_EOF_
 
 # Listing files in tmp folder
 print_command_info LISTING-TMP-FOLDER-FILES
