@@ -28,8 +28,10 @@ public class AmazonConfig {
 //        ProfileCredentialsProvider profileCredentialsProvider = new ProfileCredentialsProvider("dev");
 //        return AmazonS3ClientBuilder.standard().withRegion("us-east-1").withCredentials(profileCredentialsProvider).build();
 
-        EnvironmentVariableCredentialsProvider environmentVariableCredentialsProvider = new EnvironmentVariableCredentialsProvider();
-        return AmazonS3ClientBuilder.standard().withRegion(System.getenv("region")).withCredentials(environmentVariableCredentialsProvider).build();
+//        EnvironmentVariableCredentialsProvider environmentVariableCredentialsProvider = new EnvironmentVariableCredentialsProvider();
+//        return AmazonS3ClientBuilder.standard().withRegion(System.getenv("region")).withCredentials(environmentVariableCredentialsProvider).build();
+
+        return AmazonS3ClientBuilder.standard().build();
 
     }
 
