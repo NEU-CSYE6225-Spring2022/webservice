@@ -4,7 +4,7 @@ After=mariadb.service
 
 [Service]
 Type=simple
-ExecStart=/tmp/springboot-startup.sh
+ExecStart=/bin/sh -lc /tmp/springboot-startup.sh
 
 [Install]
 WantedBy=multi-user.target
