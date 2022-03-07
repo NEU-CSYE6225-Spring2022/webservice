@@ -15,7 +15,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class AmazonConfig {
 
-    @Value("spring.profiles.active")
+    @Value("${spring.profiles.active}")
     private String profile;
 
     @Bean
@@ -33,8 +33,13 @@ public class AmazonConfig {
             ProfileCredentialsProvider profileCredentialsProvider = new ProfileCredentialsProvider("dev");
             return AmazonS3ClientBuilder.standard().withRegion("us-east-1").withCredentials(profileCredentialsProvider).build();
         }
-        
-        return AmazonS3ClientBuilder.standard().build();
+        if(profile.equalsIgnoreCase(Constants.DEV)){
+            return AmazonS3ClientBuilder.standard().build();
+        }
+
+        EnvironmentVariableCredentialsProvider environmentVariableCredentialsProvider = new EnvironmentVariableCredentialsProvider();
+        return AmazonS3ClientBuilder.standard().withRegion("us-east-1").withCredentials(environmentVariableCredentialsProvider).build();
+
     }
 
 }
