@@ -33,13 +33,8 @@ public class AmazonConfig {
             ProfileCredentialsProvider profileCredentialsProvider = new ProfileCredentialsProvider("dev");
             return AmazonS3ClientBuilder.standard().withRegion("us-east-1").withCredentials(profileCredentialsProvider).build();
         }
-        if(profile.equalsIgnoreCase(Constants.DEV)){
-            return AmazonS3ClientBuilder.standard().build();
-        }
-
-        EnvironmentVariableCredentialsProvider environmentVariableCredentialsProvider = new EnvironmentVariableCredentialsProvider();
-        return AmazonS3ClientBuilder.standard().withRegion("us-east-1").withCredentials(environmentVariableCredentialsProvider).build();
-
+        
+        return AmazonS3ClientBuilder.standard().build();
     }
 
 }
