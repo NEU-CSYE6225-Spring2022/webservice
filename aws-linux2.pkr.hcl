@@ -30,7 +30,7 @@ build {
     inline = [
       "sleep 30"
     ]
-  }
+
 
   provisioner "file" {
     source      = "springdemo/target/springdemo-0.0.1-SNAPSHOT.jar"
