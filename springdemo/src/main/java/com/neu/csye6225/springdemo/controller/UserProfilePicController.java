@@ -78,6 +78,6 @@ public class UserProfilePicController {
         }
         ProfilePic profilePic = userProfilePicService.uploadUserProfilePic( multipartFile.getInputStream(), multipartFile.getOriginalFilename());
         UserProfilePictureResponse userProfilePictureResponse = modelMapper.map(profilePic, UserProfilePictureResponse.class);
-        return ResponseEntity.ok(userProfilePictureResponse);
+        return ResponseEntity.status(HttpStatus.CREATED).body(userProfilePictureResponse);
     }
 }
