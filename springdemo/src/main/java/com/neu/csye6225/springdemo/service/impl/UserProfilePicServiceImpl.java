@@ -59,6 +59,10 @@ public class UserProfilePicServiceImpl implements UserProfilePicService {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
         User user = userRepository.findByUsername(username);
+        ProfilePic profilePic = profilePicRepository.findByUser_id(user.getId());
+        if(profilePic!=null) {
+            deleteExistingProfilePic(profilePic);
+        }
         profilePicRepository.deleteByUser_id(user.getId());
     }
 
