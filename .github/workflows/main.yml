@@ -31,10 +31,6 @@ jobs:
       working-directory: springdemo
       run: mvn test
 
-    - name: Building Jar file
-      working-directory: springdemo
-      run: mvn package -Dmaven.test.skip=true
-
     - name: Checking AWS credentials 
       uses: aws-actions/configure-aws-credentials@v1
       with: 
@@ -50,15 +46,3 @@ jobs:
 
     - name: Running Packer template validation
       run: packer validate aws-linux2.pkr.hcl
-    
-    - name: Printing the contents of Directory before Packer build
-      run: ls -l
-
-    - name: Building Packer Template
-      run: packer build aws-linux2.pkr.hcl
-
-    - name: Printing the contents of Directory
-      run: ls -l
-    
-    - name: Printing contents of Manifest
-      run: cat manifest.json
