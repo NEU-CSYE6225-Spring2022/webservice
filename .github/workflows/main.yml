@@ -31,6 +31,10 @@ jobs:
       working-directory: springdemo
       run: mvn test
 
+    - name: Building Jar file
+      working-directory: springdemo
+      run: mvn package -Dmaven.test.skip=true
+
     - name: Checking AWS credentials 
       uses: aws-actions/configure-aws-credentials@v1
       with: 
