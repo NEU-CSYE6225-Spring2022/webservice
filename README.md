@@ -35,4 +35,3 @@ Adding packer template to create custom AWS ami with Mysql and Spring boot app.
 3. We also run the maven build to generate the Jar file.
 4. Finally we run the packer validate and then the packer build to generate the Custom AMI and push it to the dev Organization along with demo.
 5. Use this packer build AMI for cloudformation template.
-
