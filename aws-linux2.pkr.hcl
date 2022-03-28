@@ -47,6 +47,11 @@ build {
     destination = "/tmp/springboot-startup.sh"
   }
 
+  provisioner "file" {
+    source   = "codeDeployCacheRemove.sh"
+    destination = "/tmp/codeDeployCacheRemove.sh"
+  }
+
   provisioner "shell" {
     script = "startup.sh"
   }
