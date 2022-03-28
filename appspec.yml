@@ -6,11 +6,11 @@ files:
     destination: /tmp/
 hooks:
   BeforeInstall:
-    - location: codedeploy/stop_server.sh
-    - location: codedeploy/remove_older_application.sh
+    - location: ./codedeploy/stop_server.sh
+    - location: ./codedeploy/remove_older_application.sh
       timeout: 300
       runas: root
   AfterInstall:
-    - location: codedeploy/start_latest_application_server.sh
+    - location: ./codedeploy/start_latest_application_server.sh
       timeout: 300
       runas: root
