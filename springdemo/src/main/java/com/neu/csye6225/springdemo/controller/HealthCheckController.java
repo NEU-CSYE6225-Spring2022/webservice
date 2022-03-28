@@ -31,4 +31,11 @@ public class HealthCheckController {
         map.put("Status", Constants.APPLICATION_RUNNING);
         return ResponseEntity.ok(map);
     }
+
+    @GetMapping(value = "/healthh", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Map<String,String>> healthhCheck() {
+        Map<String,String> map = new HashMap<>();
+        map.put("Status", Constants.APPLICATION_RUNNING);
+        return ResponseEntity.ok(map);
+    }
 }

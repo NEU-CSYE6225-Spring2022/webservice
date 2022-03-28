@@ -5,8 +5,8 @@ name: CodeDeploy-Assignment-07-Branch
 
 env:
   ARTIFACT_NAME: csye6225-webapp-{{ github.sha }}.zip
-  CODE_DEPLOY_APPLICATION_NAME: mywebapp
-  CODE_DEPLOY_APPLICATION_DEPLOYMENT_GROUP_NAME: mywebapp
+  CODE_DEPLOY_APPLICATION_NAME: webapp
+  CODE_DEPLOY_APPLICATION_DEPLOYMENT_GROUP_NAME: webapp
   AWS_REGION: us-east-1
 
 on:
