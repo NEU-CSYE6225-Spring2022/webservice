@@ -33,11 +33,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         String health = "/healthz";
         String healthh= "/healthh";
-        String healths= "/healths";
         String swaggerUi = "/swagger-ui/**";
         http.
                 authorizeRequests()
-                .antMatchers(health, healthh, healths,swaggerUi,"/swagger-resources/**").permitAll()
+                .antMatchers(health, healthh,swaggerUi,"/swagger-resources/**").permitAll()
                 .antMatchers("/v1/user").permitAll()
                 .anyRequest()
                 .authenticated()
