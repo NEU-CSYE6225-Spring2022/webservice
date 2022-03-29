@@ -7,8 +7,9 @@ packer {
   }
 }
 
+
 source "amazon-ebs" "customWebApp" {
-  ami_name               = "webApp"
+  ami_name               = "webApp-{{uuid}}"
   ami_description        = "This ami is custom used for deploying the Spring-Boot application of CSYE6225 with mysql inbuilt"
   instance_type          = "t2.micro"
   region                 = "us-east-1"
