@@ -32,10 +32,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         String health = "/healthz";
+        String healthh= "/healthh";
         String swaggerUi = "/swagger-ui/**";
         http.
                 authorizeRequests()
-                .antMatchers(health, swaggerUi,"/swagger-resources/**").permitAll()
+                .antMatchers(health, healthh,swaggerUi,"/swagger-resources/**").permitAll()
                 .antMatchers("/v1/user").permitAll()
                 .anyRequest()
                 .authenticated()
