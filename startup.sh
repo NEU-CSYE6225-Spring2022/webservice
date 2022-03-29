@@ -11,7 +11,7 @@ sudo yum update -y
 
 # Installing Ruby
 print_command_info INSTALLING-RUBY
-sudo yum install ruby
+sudo yum install ruby -y
 
 # Installing Wget
 print_command_info INSTALLING-WGET
