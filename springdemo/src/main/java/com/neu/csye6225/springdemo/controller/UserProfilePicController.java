@@ -9,6 +9,8 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
@@ -23,6 +25,8 @@ import java.io.IOException;
 @RequestMapping("/v1/user/self/pic")
 @Api(value = "User Profile Picture related REST Endpoint", description = "Apis for adding and updating user profile pic info")
 public class UserProfilePicController {
+
+    private final static Logger logger = LogManager.getLogger(UserProfilePicController.class);
 
     private ModelMapper modelMapper;
 
@@ -43,6 +47,7 @@ public class UserProfilePicController {
     @GetMapping( produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UserProfilePictureResponse> getUserInfo() {
 
+        logger.info("Api called to get user profile pic info");
         ProfilePic profilePic = userProfilePicService.getUserProfilePic();
         UserProfilePictureResponse userProfilePictureResponse = modelMapper.map(profilePic, UserProfilePictureResponse.class);
         return ResponseEntity.ok(userProfilePictureResponse);
@@ -58,11 +63,12 @@ public class UserProfilePicController {
     @DeleteMapping( produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> deleteProfilePic() {
 
+        logger.info("Api called to delete profile pic info");
         userProfilePicService.deleteProfilePic();
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
-    @ApiOperation(value = "Get User Profile Pic Information", response = UserProfilePictureResponse.class)
+    @ApiOperation(value = "Upload User Profile Pic Information", response = UserProfilePictureResponse.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully got the User Profile Picture Information" , response = UserProfilePictureResponse.class),
             @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
@@ -72,8 +78,10 @@ public class UserProfilePicController {
     @PostMapping( produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UserProfilePictureResponse> uploadUserProfilePic(@RequestParam("profilePic") MultipartFile multipartFile) throws IOException {
 
+        logger.info("Api to upload user profile pic info");
         byte[] imageData = multipartFile.getBytes();
         if(imageData.length==0) {
+            logger.info("Image data length is 0 (ZERO)");
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
         ProfilePic profilePic = userProfilePicService.uploadUserProfilePic( multipartFile.getInputStream(), multipartFile.getOriginalFilename());

@@ -6,6 +6,8 @@ import com.neu.csye6225.springdemo.response.UserResponse;
 import com.neu.csye6225.springdemo.service.UserService;
 import com.neu.csye6225.springdemo.util.Validator;
 import io.swagger.annotations.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
@@ -19,6 +21,8 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/v1")
 @Api(value = "User related REST Endpoint", description = "Apis for adding and updating user info")
 public class UserController {
+
+    private final static Logger logger = LogManager.getLogger(UserController.class);
 
     private ModelMapper modelMapper;
 
@@ -40,6 +44,7 @@ public class UserController {
     public ResponseEntity<UserResponse> getUserInfo() {
 
         User user = userService.getUserInfo();
+        logger.info("Api /user/self is called by User :" + user.getUsername());
         UserResponse userResponse = modelMapper.map(user, UserResponse.class);
         return ResponseEntity.ok(userResponse);
     }
@@ -54,7 +59,9 @@ public class UserController {
     })
     public ResponseEntity<UserResponse> createUser(@RequestBody UserRequest userRequest) {
 
+        logger.info("Api /user is called to Create New user");
         if(!Validator.isUserRequestValid(userRequest) || isUsernameAlreadyExists(userRequest.getUsername()) ){
+            logger.info("User made a bad request");
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
         User user  = modelMapper.map(userRequest, User.class);
@@ -71,9 +78,11 @@ public class UserController {
     })
     public ResponseEntity<Void> updateUser(@RequestBody UserRequest userRequest) {
 
+        logger.info("Api /user/self is called to Update details");
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
         if(!Validator.isUserRequestValid(userRequest) || !userRequest.getUsername().equals(username)){
+            logger.info("User made a bad request");
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
 

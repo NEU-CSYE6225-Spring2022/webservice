@@ -28,6 +28,11 @@ echo $?
 print_command_info PATH-SET-LINUX
 PATH=/usr/bin:/usr/local/sbin:/sbin:/bin:/usr/sbin:/usr/local/bin:/opt/aws/bin:/root/bin
 
+# Installing the Cloud Watch Agent in the Instance
+print_command_info INSTALLING-CLOUD-WATCH-AGENT
+sudo yum install amazon-cloudwatch-agent
+sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -s
+
 # Setting Java Environment for application to run.
 print_command_info WGET-COMMAND-RUN
 wget --no-check-certificate -c --header "Cookie: oraclelicense=accept-securebackup-cookie" https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.rpm
