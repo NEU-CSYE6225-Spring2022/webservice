@@ -5,6 +5,7 @@ import com.neu.csye6225.springdemo.model.User;
 import com.neu.csye6225.springdemo.response.UserProfilePictureResponse;
 import com.neu.csye6225.springdemo.response.UserResponse;
 import com.neu.csye6225.springdemo.service.UserProfilePicService;
+import com.timgroup.statsd.StatsDClient;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -32,9 +33,14 @@ public class UserProfilePicController {
 
     private UserProfilePicService userProfilePicService;
 
-    public UserProfilePicController(ModelMapper modelMapper, @Qualifier("UserProfilePicServiceImpl") UserProfilePicService userProfilePicService) {
+    private StatsDClient statsDClient;
+
+    public UserProfilePicController(ModelMapper modelMapper, @Qualifier("UserProfilePicServiceImpl") UserProfilePicService userProfilePicService,
+                                    StatsDClient statsDClient) {
         this.modelMapper = modelMapper;
         this.userProfilePicService = userProfilePicService;
+        this.statsDClient = statsDClient;
+
     }
 
     @ApiOperation(value = "Get User Profile Pic Information", response = UserProfilePictureResponse.class)
@@ -48,6 +54,7 @@ public class UserProfilePicController {
     public ResponseEntity<UserProfilePictureResponse> getUserInfo() {
 
         logger.info("Api called to get user profile pic info");
+        statsDClient.incrementCounter("get.v1.user.self.pic");
         ProfilePic profilePic = userProfilePicService.getUserProfilePic();
         UserProfilePictureResponse userProfilePictureResponse = modelMapper.map(profilePic, UserProfilePictureResponse.class);
         return ResponseEntity.ok(userProfilePictureResponse);
@@ -64,6 +71,7 @@ public class UserProfilePicController {
     public ResponseEntity<Void> deleteProfilePic() {
 
         logger.info("Api called to delete profile pic info");
+        statsDClient.incrementCounter("delete.v1.user.self.pic");
         userProfilePicService.deleteProfilePic();
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
@@ -79,6 +87,7 @@ public class UserProfilePicController {
     public ResponseEntity<UserProfilePictureResponse> uploadUserProfilePic(@RequestParam("profilePic") MultipartFile multipartFile) throws IOException {
 
         logger.info("Api to upload user profile pic info");
+        statsDClient.incrementCounter("post.v1.user.self.pic");
         byte[] imageData = multipartFile.getBytes();
         if(imageData.length==0) {
             logger.info("Image data length is 0 (ZERO)");

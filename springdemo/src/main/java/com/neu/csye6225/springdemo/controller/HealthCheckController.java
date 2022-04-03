@@ -1,12 +1,14 @@
 package com.neu.csye6225.springdemo.controller;
 
 import com.neu.csye6225.springdemo.util.Constants;
+import com.timgroup.statsd.StatsDClient;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +23,9 @@ public class HealthCheckController {
 
     private final static Logger logger = LogManager.getLogger(HealthCheckController.class);
 
+    @Autowired
+    private StatsDClient statsDClient;
+
     @ApiOperation(value = "Check the health api", response = Map.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully got the Status"),
@@ -33,6 +38,7 @@ public class HealthCheckController {
     public ResponseEntity<Map<String,String>> healthCheck() {
 
         logger.info("Api /healthz is called");
+        statsDClient.incrementCounter("get.healthz");
         Map<String,String> map = new HashMap<>();
         map.put("Status", Constants.APPLICATION_RUNNING);
         return ResponseEntity.ok(map);
@@ -42,6 +48,7 @@ public class HealthCheckController {
     public ResponseEntity<Map<String,String>> healthhCheck() {
 
         logger.info("Api /healthh is called");
+        statsDClient.incrementCounter("get.healthh");
         Map<String,String> map = new HashMap<>();
         map.put("Status", Constants.APPLICATION_RUNNING);
         return ResponseEntity.ok(map);
@@ -51,6 +58,7 @@ public class HealthCheckController {
     public ResponseEntity<Map<String,String>> healthsCheck() {
 
         logger.info("Api /healths is called");
+        statsDClient.incrementCounter("get.healths");
         Map<String,String> map = new HashMap<>();
         map.put("Status", Constants.APPLICATION_RUNNING);
         return ResponseEntity.ok(map);

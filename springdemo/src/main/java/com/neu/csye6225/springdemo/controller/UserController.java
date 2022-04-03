@@ -5,6 +5,7 @@ import com.neu.csye6225.springdemo.request.UserRequest;
 import com.neu.csye6225.springdemo.response.UserResponse;
 import com.neu.csye6225.springdemo.service.UserService;
 import com.neu.csye6225.springdemo.util.Validator;
+import com.timgroup.statsd.StatsDClient;
 import io.swagger.annotations.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -28,9 +29,12 @@ public class UserController {
 
     private UserService userService;
 
-    public UserController(ModelMapper modelMapper, @Qualifier("UserServiceImpl") UserService userService) {
+    private StatsDClient statsDClient;
+
+    public UserController(ModelMapper modelMapper, @Qualifier("UserServiceImpl") UserService userService, StatsDClient statsDClient) {
         this.modelMapper = modelMapper;
         this.userService = userService;
+        this.statsDClient = statsDClient;
     }
 
     @ApiOperation(value = "Get User Information", response = UserResponse.class)
@@ -43,6 +47,7 @@ public class UserController {
     @GetMapping(value = "/user/self", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UserResponse> getUserInfo() {
 
+        statsDClient.incrementCounter("get.user.self");
         User user = userService.getUserInfo();
         logger.info("Api /user/self is called by User :" + user.getUsername());
         UserResponse userResponse = modelMapper.map(user, UserResponse.class);
@@ -60,6 +65,7 @@ public class UserController {
     public ResponseEntity<UserResponse> createUser(@RequestBody UserRequest userRequest) {
 
         logger.info("Api /user is called to Create New user");
+        statsDClient.incrementCounter("post.user");
         if(!Validator.isUserRequestValid(userRequest) || isUsernameAlreadyExists(userRequest.getUsername()) ){
             logger.info("User made a bad request");
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
@@ -79,6 +85,7 @@ public class UserController {
     public ResponseEntity<Void> updateUser(@RequestBody UserRequest userRequest) {
 
         logger.info("Api /user/self is called to Update details");
+        statsDClient.incrementCounter("put.user.self");
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
         if(!Validator.isUserRequestValid(userRequest) || !userRequest.getUsername().equals(username)){
