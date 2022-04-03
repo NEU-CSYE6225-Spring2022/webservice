@@ -31,7 +31,7 @@ PATH=/usr/bin:/usr/local/sbin:/sbin:/bin:/usr/sbin:/usr/local/bin:/opt/aws/bin:/
 # Installing the Cloud Watch Agent in the Instance
 print_command_info INSTALLING-CLOUD-WATCH-AGENT
 sudo yum install amazon-cloudwatch-agent
-sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -s
+sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -c file:/tmp/amazon-cloudwatch-agent.json -s
 
 # Setting Java Environment for application to run.
 print_command_info WGET-COMMAND-RUN

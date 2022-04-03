@@ -4,6 +4,8 @@ os: linux
 files:
   - source: ./springdemo/target/springdemo-0.0.1-SNAPSHOT.jar
     destination: /tmp/
+  - source: ./amazon-cloudwatch-agent.json
+    destination: /tmp/
 hooks:
   BeforeInstall:
     - location: ./codedeploy/stop_server.sh
