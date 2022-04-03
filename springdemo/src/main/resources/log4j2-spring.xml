@@ -6,8 +6,8 @@
         </Console>
 
         <RollingFile name="RollingFile"
-            fileName="./logs/spring-boot-app.log"
-            filePattern="./logs/$${date:yyyy-MM}/spring-boot-app-%d{-dd-MMMM-yyyy}-%i.log.gz">
+            fileName="/tmp/spring-boot-app.log"
+            filePattern="/tmp/$${date:yyyy-MM}/spring-boot-app-%d{-dd-MMMM-yyyy}-%i.log.gz">
             <PatternLayout>
                 <Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
             </PatternLayout>
@@ -19,7 +19,6 @@
             </Policies>
         </RollingFile>
     </Appenders>
-
 
     <Loggers>
         <Logger name="com.neu.csye6225.springdemo" level="trace" additivity="false">
