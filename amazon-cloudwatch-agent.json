@@ -4,11 +4,15 @@
       "logfile": "/opt/aws/amazon-cloudwatch-agent/logs/amazon-cloudwatch-agent.log"
     },
     "metrics": {
+        "append_dimensions": {
+            "AutoScalingGroupName": "${aws:AutoScalingGroupName}",
+            "InstanceId": "${aws:InstanceId}"
+          },
        "metrics_collected": {
            "statsd":{
                "service_address": "8125",
-               "metrics_collection_interval": 15,
-               "metrics_aggregation_interval": 300
+               "metrics_collection_interval": 5,
+               "metrics_aggregation_interval": 15
            }
        }
     },
