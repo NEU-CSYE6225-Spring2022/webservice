@@ -1,7 +1,7 @@
 package com.neu.csye6225.springdemo.controller;
 
+import com.neu.csye6225.springdemo.config.StatsdClient;
 import com.neu.csye6225.springdemo.util.Constants;
-import com.timgroup.statsd.StatsDClient;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -24,7 +24,7 @@ public class HealthCheckController {
     private final static Logger logger = LogManager.getLogger(HealthCheckController.class);
 
     @Autowired
-    private StatsDClient statsDClient;
+    private StatsdClient statsDClient;
 
     @ApiOperation(value = "Check the health api", response = Map.class)
     @ApiResponses(value = {
@@ -38,7 +38,7 @@ public class HealthCheckController {
     public ResponseEntity<Map<String,String>> healthCheck() {
 
         logger.info("Api /healthz is called");
-        statsDClient.incrementCounter("get.healthz");
+        statsDClient.increment("get.healthz");
         Map<String,String> map = new HashMap<>();
         map.put("Status", Constants.APPLICATION_RUNNING);
         return ResponseEntity.ok(map);
@@ -48,7 +48,7 @@ public class HealthCheckController {
     public ResponseEntity<Map<String,String>> healthhCheck() {
 
         logger.info("Api /healthh is called");
-        statsDClient.incrementCounter("get.healthh");
+        statsDClient.increment("get.healthh");
         Map<String,String> map = new HashMap<>();
         map.put("Status", Constants.APPLICATION_RUNNING);
         return ResponseEntity.ok(map);
@@ -58,7 +58,7 @@ public class HealthCheckController {
     public ResponseEntity<Map<String,String>> healthsCheck() {
 
         logger.info("Api /healths is called");
-        statsDClient.incrementCounter("get.healths");
+        statsDClient.increment("get.healths");
         Map<String,String> map = new HashMap<>();
         map.put("Status", Constants.APPLICATION_RUNNING);
         return ResponseEntity.ok(map);
