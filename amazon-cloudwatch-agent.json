@@ -6,7 +6,6 @@
     "metrics": {
         "append_dimensions": {
             "AutoScalingGroupName": "${aws:AutoScalingGroupName}",
-            "InstanceId": "${aws:InstanceId}"
           },
        "metrics_collected": {
            "statsd":{
