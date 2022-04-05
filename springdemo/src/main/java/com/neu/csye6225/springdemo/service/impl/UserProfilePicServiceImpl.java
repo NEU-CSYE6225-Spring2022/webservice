@@ -11,6 +11,8 @@ import com.neu.csye6225.springdemo.repository.ProfilePicRepository;
 import com.neu.csye6225.springdemo.repository.UserRepository;
 import com.neu.csye6225.springdemo.service.UserProfilePicService;
 import com.sun.xml.bind.v2.TODO;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -22,6 +24,8 @@ import java.util.Map;
 
 @Service("UserProfilePicServiceImpl")
 public class UserProfilePicServiceImpl implements UserProfilePicService {
+
+    private static final Logger logger = LogManager.getLogger(UserProfilePicServiceImpl.class);
 
     private ProfilePicRepository profilePicRepository;
 
@@ -47,6 +51,8 @@ public class UserProfilePicServiceImpl implements UserProfilePicService {
         User user = userRepository.findByUsername(username);
         ProfilePic profilePic = profilePicRepository.findByUser_id(user.getId());
         if(profilePic==null) {
+
+            logger.info("Found no profile pic for the User: "+ user.getUsername());
             profilePic = new ProfilePic(null, user.getId(), null, user.getId());
             profilePic.setUpload_date(null);
         }
@@ -61,6 +67,7 @@ public class UserProfilePicServiceImpl implements UserProfilePicService {
         User user = userRepository.findByUsername(username);
         ProfilePic profilePic = profilePicRepository.findByUser_id(user.getId());
         if(profilePic!=null) {
+            logger.info("Found profile pic for the User: "+ user.getUsername());
             deleteExistingProfilePic(profilePic);
         }
         profilePicRepository.deleteByUser_id(user.getId());
@@ -75,6 +82,7 @@ public class UserProfilePicServiceImpl implements UserProfilePicService {
         ProfilePic profilePic = profilePicRepository.findByUser_id(user.getId());
         if(profilePic==null) {
 
+            logger.info("Found no profile pic for the User: "+ user.getUsername() + ". So creating a new One");
             profilePic = new ProfilePic(fileName, user.getId(), bucketName+"/"+saveAndGetS3Path(inputStream, fileName, user) , user.getId());
             profilePic = profilePicRepository.save(profilePic);
             return profilePic;
@@ -89,6 +97,7 @@ public class UserProfilePicServiceImpl implements UserProfilePicService {
 
     private String saveAndGetS3Path(InputStream inputStream, String fileName, User user) {
 
+        logger.info("Saving profile pic to S3 for the User: "+ user.getUsername());
         Map<String, String> map = new HashMap<>();
         map.put("user_id", user.getId());
         map.put("fileName", fileName);
@@ -101,8 +110,11 @@ public class UserProfilePicServiceImpl implements UserProfilePicService {
     }
 
     private void deleteExistingProfilePic(ProfilePic profilePic) {
+
+        logger.info("Deleting profile pic for the User: "+ profilePic.getUser_id());
         String path = profilePic.getUrl();
         if(path==null || path.isEmpty() ) {
+            logger.info(" No pic is stored in S3 ");
             return;
         }
         if(amazonS3.doesObjectExist(bucketName, path.substring(1+bucketName.length()))){

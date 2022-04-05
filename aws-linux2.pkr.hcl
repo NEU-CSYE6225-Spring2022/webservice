@@ -53,6 +53,11 @@ build {
     destination = "/tmp/codeDeployCacheRemove.sh"
   }
 
+  provisioner "file" {
+    source  = "amazon-cloudwatch-agent.json"
+    destination   = "/tmp/amazon-cloudwatch-agent.json"
+  }
+
   provisioner "shell" {
     script = "startup.sh"
   }

@@ -4,6 +4,8 @@ import com.neu.csye6225.springdemo.model.User;
 import com.neu.csye6225.springdemo.repository.UserRepository;
 import com.neu.csye6225.springdemo.request.UserRequest;
 import com.neu.csye6225.springdemo.service.UserService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -11,6 +13,8 @@ import org.springframework.stereotype.Service;
 
 @Service("UserServiceImpl")
 public class UserServiceImpl implements UserService {
+
+    private static final Logger logger = LogManager.getLogger(UserServiceImpl.class);
 
     private UserRepository userRepository;
 
@@ -23,6 +27,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUserInfo() {
+
+        logger.info("Getting User info from db");
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
         User user = userRepository.findByUsername(username);
@@ -31,6 +37,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User createUser(User user) {
+
+        logger.info("Creating a new User in db");
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user = userRepository.save(user);
         return user;
@@ -38,6 +46,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User updateUser(UserRequest userRequest) {
+
+        logger.info("Updating the User : "+userRequest.getUsername());
         User user = getUserInfo();
         user.setPassword(bCryptPasswordEncoder.encode(userRequest.getPassword()));
         user.setFirst_name(userRequest.getFirst_name());
