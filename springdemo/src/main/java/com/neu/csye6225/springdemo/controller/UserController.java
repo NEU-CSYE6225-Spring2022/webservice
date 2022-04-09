@@ -19,7 +19,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/v1")
+@RequestMapping("/v2")
 @Api(value = "User related REST Endpoint", description = "Apis for adding and updating user info")
 public class UserController {
 
