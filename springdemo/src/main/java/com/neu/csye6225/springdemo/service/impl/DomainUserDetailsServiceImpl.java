@@ -31,12 +31,12 @@ public class DomainUserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsernameAndAccountVerified(username, true);
         if (user != null) {
-            logger.info("User found in db with username:"+ username );
+            logger.info("Verified User found in db with username:"+ username );
             return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
                     true, true, true, true, new ArrayList<>());
         } else {
-            logger.info("User not found in db with username:"+ username );
-            throw new UsernameNotFoundException("User not found with username: " + username);
+            logger.info("Verified User not found in db with username:"+ username );
+            throw new UsernameNotFoundException("Verified User not found with username: " + username);
         }
     }
 }
