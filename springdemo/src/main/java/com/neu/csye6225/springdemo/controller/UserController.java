@@ -97,6 +97,22 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
+    @ApiOperation(value = "Verify User Email Address")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successfully verified the User Email Address"),
+            @ApiResponse(code = 401, message = "You are not authorized to call this"),
+            @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
+            @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
+    })
+    @GetMapping(value = "/VerifyUserEmail", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Void> verifyUserEmail(@RequestParam(name = "email") String userEmail, @RequestParam(name = "token") long userToken) {
+
+        statsDClient.increment("get.verifyUserEmail");
+        logger.info("Api /VerifyUserEmail is called by User :" + userEmail);
+        userService.verifyUserEmail(userEmail, userToken);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
     private boolean isUsernameAlreadyExists(String username) {
 
         return userService.isUsernameAlreadyExists(username);

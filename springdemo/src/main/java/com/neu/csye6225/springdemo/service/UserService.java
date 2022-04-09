@@ -12,4 +12,8 @@ public interface UserService {
     User updateUser(UserRequest user);
 
     boolean isUsernameAlreadyExists(String username);
+
+    void verifyUserEmail(String userEmail, long userToken);
+
+    boolean isUserVerified(String userName);
 }

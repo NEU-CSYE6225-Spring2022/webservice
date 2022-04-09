@@ -34,10 +34,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         String health = "/healthz";
         String healthh= "/healthh";
         String swaggerUi = "/swagger-ui/**";
+        String emailVerify = "/v1/VerifyUserEmail";
         http.
                 authorizeRequests()
-                .antMatchers(health, healthh,swaggerUi,"/swagger-resources/**").permitAll()
-                .antMatchers("/v1/user").permitAll()
+                .antMatchers(health, healthh,swaggerUi,"/swagger-resources/**", emailVerify).permitAll()
+                .antMatchers("/v1/user", emailVerify).permitAll()
                 .anyRequest()
                 .authenticated()
                 .and().httpBasic()
@@ -50,7 +51,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception {
         web
                 .ignoring()
-                .antMatchers("/v2/api-docs", "/swagger-ui/**", "/v1/user");
+                .antMatchers("/v2/api-docs", "/swagger-ui/**", "/v1/user", "/v1/VerifyUserEmail");
     }
 
 }

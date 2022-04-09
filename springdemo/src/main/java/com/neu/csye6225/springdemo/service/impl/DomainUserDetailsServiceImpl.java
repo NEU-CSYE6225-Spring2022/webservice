@@ -29,7 +29,7 @@ public class DomainUserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUsername(username);
+        User user = userRepository.findByUsernameAndAccountVerified(username, true);
         if (user != null) {
             logger.info("User found in db with username:"+ username );
             return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),

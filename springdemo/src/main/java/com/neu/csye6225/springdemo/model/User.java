@@ -58,6 +58,10 @@ public class User implements Serializable {
     @ApiModelProperty(example = "Default generated", readOnly = true)
     private Date account_updated;
 
+    @Column(name = "account_verified")
+    @ApiModelProperty(example = "Account email is Verified ?")
+    private boolean accountVerified;
+
     public User(String username, String password) {
         this.username = username;
         this.password = password;
