@@ -37,7 +37,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.
                 authorizeRequests()
                 .antMatchers(health, healthh,swaggerUi,"/swagger-resources/**").permitAll()
-                .antMatchers("/v1/user").permitAll()
+                .antMatchers("/v2/user").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and().httpBasic()
@@ -50,7 +50,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception {
         web
                 .ignoring()
-                .antMatchers("/v2/api-docs", "/swagger-ui/**", "/v1/user");
+                .antMatchers("/v2/api-docs", "/swagger-ui/**", "/v2/user");
     }
 
 }
