@@ -72,7 +72,7 @@ jobs:
     - name: Build Artifact for CodeDeploy
       run: |
         mkdir codeDeployArtifact
-        zip -r ${{ env.ARTIFACT_NAME }} springdemo/target/springdemo-0.0.1-SNAPSHOT.jar codedeploy/*.sh appspec.yml 
+        zip -r ${{ env.ARTIFACT_NAME }} springdemo/target/springdemo-0.0.1-SNAPSHOT.jar codedeploy/*.sh appspec.yml amazon-cloudwatch-agent.json
         pwd
         ls -al
         mv ${{ env.ARTIFACT_NAME }} codeDeployArtifact/

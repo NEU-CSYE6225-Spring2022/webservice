@@ -1,7 +1,4 @@
-# This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
-# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
-
-name: Main Branch Merge Workflow
+name: Lambda-Assignment-09-Branch
 
 env:
   ARTIFACT_NAME: csye6225-webapp-${{ github.sha }}.zip
@@ -11,7 +8,7 @@ env:
 
 on:
   push:
-    branches: [ main ]
+    branches: [ assignment-09 ]
 
 jobs:
   build:
@@ -41,7 +38,7 @@ jobs:
       working-directory: springdemo
       run: mvn package -Dmaven.test.skip=true
 
-    - name: Checking AWS credentials 
+    - name: Checking AWS credentials for DEV
       uses: aws-actions/configure-aws-credentials@v1
       with: 
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -85,7 +82,7 @@ jobs:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_PROD }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_PROD }}
         aws-region: us-east-1
-
+    
     - name: Pushing Artifact to S3
       working-directory: codeDeployArtifact
       run: | 
