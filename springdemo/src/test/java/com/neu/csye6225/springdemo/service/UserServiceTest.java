@@ -1,5 +1,7 @@
 package com.neu.csye6225.springdemo.service;
 
+import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
+import com.amazonaws.services.sns.AmazonSNS;
 import com.neu.csye6225.springdemo.model.User;
 import com.neu.csye6225.springdemo.repository.UserRepository;
 import com.neu.csye6225.springdemo.service.impl.UserServiceImpl;
@@ -27,13 +29,19 @@ public class UserServiceTest {
 
     private UserServiceImpl userServiceImpl;
 
+    @Mock
+    private AmazonDynamoDB amazonDynamoDB;
+
+    @Mock
+    private AmazonSNS amazonSNS;
+
     private User user;
 
     @Before
     public void setUp() {
         initMocks(this);
         userServiceImpl = new UserServiceImpl(userRepository,
-                bCryptPasswordEncoder);
+                bCryptPasswordEncoder, amazonDynamoDB, amazonSNS);
         user = new User("satish","bingi","bingis@gmail.com","1234567890");
 
         Mockito.when(userRepository.save(any()))
