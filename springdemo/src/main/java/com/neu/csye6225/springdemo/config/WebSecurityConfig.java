@@ -52,6 +52,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         web
                 .ignoring()
                 .antMatchers("/v2/api-docs", "/swagger-ui/**", "/v1/user", "/v1/VerifyUserEmail");
+
     }
 
 }
