@@ -69,7 +69,7 @@ public class UserServiceImpl implements UserService {
 
         logger.info("generating token for the User with mail: " + user.getUsername());
         Random rand = new Random();
-        long randomNo = rand.nextLong();
+        long randomNo = rand.nextInt(900000) + 100000;
         DynamoDB dynamoDB = new DynamoDB(amazonDynamoDB);
         Table table = dynamoDB.getTable("userToken");
         long expiryTime = System.currentTimeMillis()/1000 + 5*60;
