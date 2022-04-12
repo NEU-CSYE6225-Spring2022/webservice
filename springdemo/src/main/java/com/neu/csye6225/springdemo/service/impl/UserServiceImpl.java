@@ -121,19 +121,19 @@ public class UserServiceImpl implements UserService {
         }
         DynamoDB dynamoDB = new DynamoDB(amazonDynamoDB);
         Table table = dynamoDB.getTable("userToken");
-        Item item = table.getItem("email", userEmail);
+        Item item = table.getItem("email", userEmail, "token", userToken);
         if(item!=null) {
-            long serverToken = item.getLong("token");
-            if(serverToken == userToken) {
+//            long serverToken = item.getLong("token");
+//            if(serverToken == userToken) {
                 logger.info("Verified the userEmail:" + userEmail + " with Token:" + userToken);
                 user.setAccountVerified(true);
                 userRepository.saveAndFlush(user);
                 return;
-            }
-            logger.info("Token mismatched for userEmail:" + userEmail + " Given Token:" + userToken + " Expected Token:" + serverToken);
-            return;
+//            }
+//            logger.info("Token mismatched for userEmail:" + userEmail + " Given Token:" + userToken + " Expected Token:" + serverToken);
+//            return;
         }
-        logger.info("No Token Exists in the DynamoDB for userEmail:" + userEmail);
+        logger.info("Token mismatched in the DynamoDB for userEmail:" + userEmail);
     }
 
     @Override
