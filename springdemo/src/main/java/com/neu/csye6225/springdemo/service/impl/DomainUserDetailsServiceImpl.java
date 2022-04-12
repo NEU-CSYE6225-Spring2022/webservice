@@ -29,6 +29,7 @@ public class DomainUserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        logger.info("Finding verified User in db with username:"+ username );
         User user = userRepository.findByUsernameAndAccountVerified(username, true);
         if (user != null) {
             logger.info("Verified User found in db with username:"+ username );
