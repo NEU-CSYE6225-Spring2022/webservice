@@ -28,6 +28,7 @@ Basic spring-boot project with maven and swagger docs setup. Added Basic auth se
 7. http://localhost:8080/v1/user/self/pic (POST --- to add user profile pic)
 8. http://localhost:8080/v1/user/self/pic (GET --- get users profile pic)
 9. http://localhost:8080/v1/user/self/pic (DELETE --- delete users pic)
+10. http://localhost:8080/v1/user/VerifyUserEmail?email=xxxxxx&token=xxxxxx (GET --- Verify user for Allowing further Access)
 ## Packer template file included
 Adding packer template to create custom AWS ami with Mysql and Spring boot app.
 1. Github actions runs the commands to install dependencies for Packer, Aws cli.
