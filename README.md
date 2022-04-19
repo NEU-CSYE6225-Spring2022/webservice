@@ -37,3 +37,4 @@ Adding packer template to create custom AWS ami with Mysql and Spring boot app.
 4. Finally we run the packer validate and then the packer build to generate the Custom AMI and push it to the dev Organization along with demo.
 5. Use this packer build AMI for cloudformation template.
 6. Added workflow changes to push artifact to S3 bucket and Call CodeDeploy API to update the source code in instances.
+7. Added mysql ssl connection
