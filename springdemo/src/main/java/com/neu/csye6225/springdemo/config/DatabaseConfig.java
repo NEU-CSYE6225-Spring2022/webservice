@@ -29,7 +29,7 @@ public class DatabaseConfig {
         DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
         if(database.equalsIgnoreCase(Constants.MYSQL)){
             dataSourceBuilder.driverClassName("com.mysql.cj.jdbc.Driver");
-            dataSourceBuilder.url("jdbc:mysql://"+ databasehost +"/csye6225?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false&allowPublicKeyRetrieval=true&useSSL=false");
+            dataSourceBuilder.url("jdbc:mysql://"+ databasehost +"/csye6225?useSSL=true&serverTimezone=UTC&useLegacyDatetimeCode=false&allowPublicKeyRetrieval=true&sslmode=REQUIRED");
         }else{
             dataSourceBuilder.driverClassName("org.h2.Driver");
             dataSourceBuilder.url("jdbc:h2:mem:db;DB_CLOSE_DELAY=-1");
