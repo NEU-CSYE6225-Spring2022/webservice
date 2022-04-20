@@ -123,15 +123,14 @@ public class UserServiceImpl implements UserService {
         Table table = dynamoDB.getTable("userToken");
         Item item = table.getItem("email", userEmail, "token", userToken);
         if(item!=null) {
-//            long serverToken = item.getLong("token");
-//            if(serverToken == userToken) {
+                if(item.getLong("ttl") < System.currentTimeMillis()/1000) {
+                    logger.info("Token Expired Already");
+                    return;
+                }
                 logger.info("Verified the userEmail:" + userEmail + " with Token:" + userToken);
                 user.setAccountVerified(true);
                 userRepository.saveAndFlush(user);
                 return;
-//            }
-//            logger.info("Token mismatched for userEmail:" + userEmail + " Given Token:" + userToken + " Expected Token:" + serverToken);
-//            return;
         }
         logger.info("Token mismatched in the DynamoDB for userEmail:" + userEmail);
     }
